@@ -1,575 +1,709 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voice Care Workshop - Career Katta</title>
     <link rel="shortcut icon" href="ck-png.webp" type="image/x-icon">
-    <!-- Bootstrap 5.3 CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome Icons CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <!-- Google Fonts (Inter) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --navy:     #0A2540;
+            --blue:     #1565C0;
+            --sky:      #0EA5E9;
+            --light-bg: #F0F7FF;
+            --green:    #059669;
+            --amber:    #D97706;
+            --purple:   #7C3AED;
+            --white:    #FFFFFF;
+            --text:     #0F172A;
+            --muted:    #64748B;
+            --border:   #E2E8F0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-            color: #334155;
+            background: #FFFFFF;
+            color: var(--text);
             overflow-x: hidden;
         }
 
+        /* ===== NAVBAR ===== */
+        .navbar {
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-link { font-size: 0.9rem; color: #475569 !important; }
+        .nav-link.active { color: var(--blue) !important; }
+        .nav-link:hover  { color: var(--navy) !important; }
+
+        /* ===== HERO ===== */
         .hero-section {
-            /* Replace the background image path inside url('') if needed */
-            background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('ck-hero-bg.webp');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            padding: 4rem 1rem;
+            background: linear-gradient(135deg, #0A2540 0%, #1565C0 55%, #0EA5E9 100%);
+            padding: 3.5rem 1rem 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Responsive Branding Images inside Hero */
+        /* Soft radial glow top-right */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -80px;
+            width: 380px; height: 380px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(14,165,233,0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
         .hero-logo-img {
-            width: 90px;
-            height: 90px;
+            width: 54px; height: 54px;
             object-fit: contain;
-            background-color: #f1f5f9;
-            transition: transform 0.3s ease;
-        }
-
-        @media (min-width: 768px) {
-            .hero-section {
-                padding: 4.5rem 1rem;
-            }
-        }
-
-        /* 📸 Symmetrical Branding Layout Controller for Mobile & Desktop */
-        .branding-container {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 750px;
-            margin: 0 auto 2rem auto;
-            gap: 10px;
-        }
-
-        @media (max-width: 576px) {
-            .branding-container {
-                gap: 8px;
-            }
-        }
-
-        .logo-wrapper {
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            border: 2px solid rgba(255,255,255,0.28);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.22);
             flex-shrink: 0;
         }
-
-        /* Responsive Branding Images inside Hero - Optimized Sizing */
-        .hero-logo-img {
-            width: 55px;
-            height: 55px;
-            object-fit: contain;
-            background-color: #f1f5f9;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease;
-        }
-
-        @media (min-width: 576px) {
-            .hero-logo-img {
-                width: 80px;
-                height: 80px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .hero-logo-img {
-                width: 120px;
-                height: 120px;
-            }
-        }
-
-        /* Center Gov Badge Responsive Wrapper */
-        .badge-wrapper {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        @media (min-width: 576px) { .hero-logo-img { width: 68px; height: 68px; } }
+        @media (min-width: 768px) { .hero-logo-img { width: 86px; height: 86px; } }
 
         .gov-badge {
-            background-color: rgba(15, 23, 42, 0.65);
-            border: 1px solid rgba(0, 212, 255, 0.25);
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.22);
             border-radius: 50px;
-            color: #ffffff;
+            color: #fff;
             font-weight: 600;
-            line-height: 1.4;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
-            backdrop-filter: blur(6px);
-            padding: 8px 12px;
-            font-size: 0.62rem;
+            backdrop-filter: blur(8px);
+            padding: 8px 14px;
+            font-size: 0.6rem;
             text-align: center;
-            width: 100%;
-            max-width: 450px;
         }
+        @media (min-width: 576px) { .gov-badge { font-size: 0.7rem;  padding: 10px 20px; } }
+        @media (min-width: 768px) { .gov-badge { font-size: 0.76rem; padding: 12px 26px; } }
 
-        @media (min-width: 576px) {
-            .gov-badge {
-                font-size: 0.72rem;
-                padding: 10px 16px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .gov-badge {
-                font-size: 0.78rem;
-                padding: 12px 24px;
-            }
-        }
-
-        .feature-card {
-            transition: all 0.3s ease;
-            border: 1px solid #e2e8f0 !important;
-            border-radius: 12px;
-            background-color: #ffffff;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-        }
-
-        /* Optimized responsive height for image layouts */
-        .photo-placeholder-box {
-            background-color: #e2e8f0;
-            height: 220px;
+        /* — Animated Wave Bars (signature element) — */
+        .wave-bars {
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 8px;
+            gap: 3px;
+            height: 52px;
+            margin: 1.8rem auto 0;
+        }
+        .wb {
+            width: 4px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.55);
+            animation: pulse 1.4s ease-in-out infinite;
+        }
+        .wb.hi { background: rgba(255,255,255,0.92); }
+
+        .wb:nth-child(1)  { height:10px; animation-delay:.00s; }
+        .wb:nth-child(2)  { height:20px; animation-delay:.09s; }
+        .wb:nth-child(3)  { height:34px; animation-delay:.18s; }
+        .wb:nth-child(4)  { height:26px; animation-delay:.06s; }
+        .wb:nth-child(5)  { height:46px; animation-delay:.13s; }
+        .wb:nth-child(6)  { height:36px; animation-delay:.22s; }
+        .wb:nth-child(7)  { height:52px; animation-delay:.04s; }
+        .wb:nth-child(8)  { height:38px; animation-delay:.17s; }
+        .wb:nth-child(9)  { height:52px; animation-delay:.00s; }
+        .wb:nth-child(10) { height:40px; animation-delay:.11s; }
+        .wb:nth-child(11) { height:52px; animation-delay:.25s; }
+        .wb:nth-child(12) { height:36px; animation-delay:.08s; }
+        .wb:nth-child(13) { height:44px; animation-delay:.19s; }
+        .wb:nth-child(14) { height:28px; animation-delay:.14s; }
+        .wb:nth-child(15) { height:16px; animation-delay:.05s; }
+        .wb:nth-child(16) { height:34px; animation-delay:.20s; }
+        .wb:nth-child(17) { height:46px; animation-delay:.10s; }
+        .wb:nth-child(18) { height:32px; animation-delay:.03s; }
+        .wb:nth-child(19) { height:22px; animation-delay:.16s; }
+        .wb:nth-child(20) { height:12px; animation-delay:.07s; }
+        .wb:nth-child(21) { height:08px; animation-delay:.22s; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scaleY(1);    opacity: .6; }
+            50%       { transform: scaleY(.38);  opacity: 1;  }
+        }
+
+        /* Curved bottom */
+        .hero-curve {
+            height: 56px;
+            background: #FFFFFF;
+            clip-path: ellipse(56% 100% at 50% 100%);
+        }
+
+        /* ===== SHARED SECTION HEADINGS ===== */
+        .eyebrow {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--sky);
+            display: block;
+            margin-bottom: .5rem;
+        }
+        .sec-title {
+            font-size: calc(1.35rem + 0.45vw);
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--navy);
+            letter-spacing: -.025em;
+        }
+
+        /* ===== VOICE CARE CARDS ===== */
+        .vc-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem 1.75rem;
+            position: relative;
             overflow: hidden;
-            width: 100%;
-        }
-
-        @media (min-width: 576px) {
-            .photo-placeholder-box {
-                height: 280px;
-            }
-        }
-
-        @media (min-width: 992px) {
-            .photo-placeholder-box {
-                height: 320px;
-            }
-        }
-
-        .photo-placeholder-box img {
-            width: 100%;
+            transition: transform .3s, box-shadow .3s, border-color .3s;
             height: 100%;
-            object-fit: cover;
+        }
+        .vc-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+        }
+        .vc-card.c1::before { background: var(--sky); }
+        .vc-card.c2::before { background: var(--blue); }
+        .vc-card.c3::before { background: var(--green); }
+        .vc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 44px rgba(0,0,0,.07);
+            border-color: #c7dff7;
+        }
+        .vc-icon-box {
+            width: 52px; height: 52px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.25rem;
         }
 
-        /* Smooth tracking adjustments */
-        .tracking-tight {
-            letter-spacing: -0.025em;
+        /* ===== FDP CARDS ===== */
+        .fdp-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform .3s, box-shadow .3s;
+            height: 100%;
+        }
+        .fdp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 44px rgba(0,0,0,.08);
+        }
+        .fdp-header {
+            padding: 2.25rem 1.5rem;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .fdp-icon-ring {
+            width: 78px; height: 78px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.22);
+            border: 2px solid rgba(255,255,255,.3);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+            color: #fff;
+        }
+        .fdp-body { padding: 1.5rem 1.75rem 2rem; }
+
+        /* ===== IMPACT CARDS ===== */
+        .impact-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: transform .3s, box-shadow .3s;
+            height: 100%;
+        }
+        .impact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 44px rgba(0,0,0,.07);
+        }
+        .impact-icon {
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.75rem;
+            margin: 0 auto 1.25rem;
         }
 
-        /* Dynamic Title Styling for Mobile Viewports */
-        .responsive-title {
-            font-size: calc(1.45rem + 1.1vw);
-            line-height: 1.25;
+        /* ===== DIVIDER ===== */
+        .fade-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border) 30%, var(--border) 70%, transparent);
+            margin: 0 auto;
+            max-width: 80%;
         }
+
+        /* ===== FOOTER ===== */
+        .footer-wrap {
+            background: linear-gradient(135deg, #0A2540 0%, #1565C0 100%);
+        }
+        .footer-link {
+            color: rgba(255,255,255,.82);
+            text-decoration: none;
+            font-size: .88rem;
+            display: block;
+            margin-bottom: .5rem;
+            transition: opacity .2s;
+        }
+        .footer-link:hover { opacity: 1; color: #fff; }
+        .footer-h {
+            font-weight: 700;
+            font-size: .88rem;
+            margin-bottom: 1rem;
+            padding-bottom: .5rem;
+            border-bottom: 2px solid rgba(255,255,255,.18);
+        }
+        .soc-btn {
+            width: 30px; height: 30px;
+            background: rgba(255,255,255,.12);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            font-size: .7rem;
+            transition: background .2s;
+        }
+        .soc-btn:hover { background: rgba(255,255,255,.25); color: #fff; }
+
+        .contact-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 1rem; }
+        .contact-icon {
+            width: 32px; height: 32px;
+            background: rgba(255,255,255,.12);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            font-size: .72rem;
+        }
+        .contact-label {
+            font-size: .65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .09em;
+            opacity: .55;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .contact-val { font-size: .84rem; opacity: .88; }
     </style>
 </head>
-
 <body>
 
-    <!-- ================================================================= -->
-    <!-- NAVIGATION BAR COMPONENT                                         -->
-    <!-- ================================================================= -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-2 py-lg-3">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center fw-bold text-primary gap-2" href="#">
-                <img src="ck-png.webp" alt="Logo Placeholder" class="rounded border flex-shrink-0"
-                    style="width: 40px; height: 40px; object-fit: contain; background-color: #f1f5f9;">
-                <span class="text-wrap tracking-tight"
-                    style="font-size: 0.88rem; max-width: 200px; display: inline-block;">VOICE CARE WORKSHOP</span>
-            </a>
-            <button class="navbar-toggler border-0 shadow-none p-1" type="button" data-bs-toggle="collapse"
-                data-bs-target="#coeNavbar">
-                <span class="navbar-toggler-icon" style="width: 1.2rem; height: 1.2rem;"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="coeNavbar">
-                <ul class="navbar-nav gap-1 mt-3 mt-lg-0 text-start">
-                    <li class="nav-item"><a class="nav-link active fw-semibold text-primary" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#voice-care">Voice Care</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#fdp-programs">FDP Initiatives</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#impact-outcomes">Ecosystem Impact</a></li>
-                </ul>
-            </div>
+<!-- ========================================================= -->
+<!-- NAVBAR                                                    -->
+<!-- ========================================================= -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top py-2 py-lg-3">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center fw-bold gap-2" href="#"
+           style="color: var(--navy); font-size: .9rem;">
+            <img src="ck-png.webp" alt="Logo" class="rounded border"
+                 style="width:40px;height:40px;object-fit:contain;background:#f1f5f9;flex-shrink:0;">
+            VOICE CARE WORKSHOP
+        </a>
+        <button class="navbar-toggler border-0 shadow-none p-1" type="button"
+                data-bs-toggle="collapse" data-bs-target="#nav">
+            <span class="navbar-toggler-icon" style="width:1.2rem;height:1.2rem;"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="nav">
+            <ul class="navbar-nav gap-1 mt-3 mt-lg-0">
+                <li class="nav-item"><a class="nav-link active fw-semibold" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#voice-care">Voice Care</a></li>
+                <li class="nav-item"><a class="nav-link" href="#fdp-programs">FDP Programs</a></li>
+                <li class="nav-item"><a class="nav-link" href="#impact-outcomes">Our Impact</a></li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
 
-    <!-- ================================================================= -->
-    <!-- FULLY RESPONSIVE HERO SECTION (GRID & FLEX COMBINATION)           -->
-    <!-- ================================================================= -->
-    <header class="hero-section text-white text-center d-flex align-items-center">
-        <div class="container px-2">
+<!-- ========================================================= -->
+<!-- HERO                                                       -->
+<!-- ========================================================= -->
+<header class="hero-section text-white text-center">
+    <div class="container px-3 position-relative" style="z-index:1;">
 
-            <!-- Structural branding container with exact row flex-matching logic -->
-            <div class="branding-container">
-                <!-- Left Logo -->
-                <div class="logo-wrapper">
-                    <img src="hedm.webp" alt="HED Logo" class="hero-logo-img">
-                </div>
-
-                <!-- Center Badge Structure -->
-                <div class="badge-wrapper">
-                    <div class="gov-badge">
-                        Higher & Technical Education Department Govt. of Maharashtra & MITSC
-                    </div>
-                </div>
-
-                <!-- Right Logo -->
-                <div class="logo-wrapper">
-                    <img src="mitsc-png.png" alt="MITSC Logo" class="hero-logo-img">
-                </div>
+        <!-- Logos + Badge row -->
+        <div class="d-flex align-items-center justify-content-center gap-3 gap-md-4 mb-4">
+            <img src="hedm.webp"      alt="HED Logo"   class="hero-logo-img">
+            <div class="gov-badge flex-grow-1" style="max-width:440px;">
+                Higher &amp; Technical Education Dept. · Govt. of Maharashtra · MITSC
             </div>
-
-            <!-- Content Area -->
-            <div class="row justify-content-center mt-2">
-                <div class="col-11 col-sm-10 col-lg-9 col-xl-8">
-                    <h1 class="responsive-title fw-bold tracking-tight mb-3 px-1"> Voice Workshop</h1>
-                    <p class="text-light mx-auto mb-0 px-2"
-                        style="font-weight: 300; font-size: calc(0.88rem + 0.12vw); opacity: 0.9; max-width: 780px; line-height: 1.5;">
-                        A pioneering national initiative dedicated to holistic youth development and advanced
-                        occupational health and pedagogical training for educators.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-    </header>
-
-
-    <!-- ================================================================= -->
-    <!-- VOICE CARE WORKSHOP SECTION                                      -->
-    <!-- ================================================================= -->
-    <section id="voice-care" class="container py-4 py-md-5 my-2">
-        <div class="row align-items-center g-4 g-lg-5">
-            <div class="col-lg-6 order-2 order-lg-1">
-                <span class="text-primary fw-bold text-uppercase tracking-wider small d-block mb-2">Occupational Health
-                    & Training</span>
-                <h2 class="fw-extrabold text-dark tracking-tight mb-4"
-                    style="font-size: calc(1.3rem + 0.4vw); line-height: 1.3;">First-of-its-Kind Professional Voice Care
-                </h2>
-
-                <div class="d-flex gap-3 mb-4">
-                    <div class="text-primary mt-1 flex-shrink-0"><i class="fa-solid fa-microphone-lines fs-5"></i></div>
-                    <div>
-                        <h5 class="fw-bold text-dark mb-1" style="font-size: 1.05rem;">Acoustic Health Preservation</h5>
-                        <p class="text-secondary small mb-0">Formally recognizing educators as "Professional Voice
-                            Users" to provide strategic vocal maintenance, preventative therapy tools, and medical
-                            insights to secure long-term vocal endurance.</p>
-                    </div>
-                </div>
-
-                <div class="d-flex gap-3 mb-4">
-                    <div class="text-primary mt-1 flex-shrink-0"><i class="fa-solid fa-wave-square fs-5"></i></div>
-                    <div>
-                        <h5 class="fw-bold text-dark mb-1" style="font-size: 1.05rem;">Early Disorder Diagnostic Mapping
-                        </h5>
-                        <p class="text-secondary small mb-0">Training college professors to identify micro-changes in
-                            speech modulations, helping them intercept potential chronic vocal conditions and clinical
-                            fatigue at early stages.</p>
-                    </div>
-                </div>
-
-                <div class="d-flex gap-3">
-                    <div class="text-primary mt-1 flex-shrink-0"><i class="fa-solid fa-shield-heart fs-5"></i></div>
-                    <div>
-                        <h5 class="fw-bold text-dark mb-1" style="font-size: 1.05rem;">Synchronized Holistic Well-being
-                        </h5>
-                        <p class="text-secondary small mb-0">Rethinking institutional design parameters by pairing
-                            physical vocal protection with modern workspace optimization frameworks for teachers across
-                            Maharashtra.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 order-1 order-lg-2 mb-2 mb-lg-0">
-                <div class="photo-placeholder-box shadow-sm border">
-                    <img src="" alt="Voice Care Workshop Reference">
-                </div>
-                <div class="text-muted small text-center mt-2 fst-italic">Professional Voice User Training Matrix
-                    Placeholder</div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- ================================================================= -->
-    <!-- FDP INITIATIVES SECTION                                           -->
-    <!-- ================================================================= -->
-    <section id="fdp-programs" class="bg-light py-5 border-top border-bottom border-secondary-subtle">
-        <div class="container py-2">
-            <div class="text-center mx-auto mb-5" style="max-width: 620px;">
-                <span
-                    class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-1.5 text-uppercase font-bold tracking-wider mb-2"
-                    style="font-size: 0.72rem; letter-spacing: 0.05em;">Career Advancement Scheme (C.A.S.)</span>
-                <h2 class="fw-extrabold text-dark tracking-tight px-1" style="font-size: calc(1.3rem + 0.4vw);">Advanced
-                    Pedagogical Training</h2>
-                <p class="text-muted small px-3 mt-2">Collaborating with MSFDA and the Madan Mohan Malaviya Faculty
-                    Development Academy to equip educators with highly practical modern skillsets.</p>
-            </div>
-
-            <div class="row g-4 justify-content-center px-1">
-                <div class="col-sm-10 col-md-6 col-lg-4">
-                    <div class="card feature-card p-4 h-100 shadow-xs text-center border-0">
-                        <div class="text-primary mb-3"><i class="fa-solid fa-brain display-6"></i></div>
-                        <h5 class="fw-bold text-dark">Emotional Intelligence</h5>
-                        <p class="text-muted small m-0 mt-2">Developing profound behavioral management mechanics to
-                            improve interpersonal stress regulation and build constructive mentorship models inside
-                            modern colleges.</p>
-                    </div>
-                </div>
-
-                <div class="col-sm-10 col-md-6 col-lg-4">
-                    <div
-                        class="card feature-card p-4 h-100 shadow-xs text-center border-0 border-top border-3 border-primary">
-                        <div class="text-primary mb-3"><i class="fa-solid fa-lightbulb display-6 text-primary"></i>
-                        </div>
-                        <h5 class="fw-bold text-dark">Design Thinking</h5>
-                        <p class="text-muted small m-0 mt-2">Fostering creative problem-solving paradigms to
-                            systematically re-architect class curriculum models and address student engagement
-                            challenges effectively.</p>
-                    </div>
-                </div>
-
-                <div class="col-sm-10 col-md-6 col-lg-4">
-                    <div class="card feature-card p-4 h-100 shadow-xs text-center border-0">
-                        <div class="text-success mb-3"><i class="fa-solid fa-robot display-6 text-success"></i></div>
-                        <h5 class="fw-bold text-dark">AI Integration Training</h5>
-                        <p class="text-muted small m-0 mt-2">Deploying artificial intelligence operational techniques to
-                            automate administrative task-routing and implement cutting-edge digitized educational
-                            systems.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- ================================================================= -->
-    <!-- ECOSYSTEM IMPACT SECTION                                          -->
-    <!-- ================================================================= -->
-    <section id="impact-outcomes" class="container py-5 my-2">
-        <div class="text-center mx-auto mb-5" style="max-width: 650px;">
-            <span class="text-primary fw-bold text-uppercase tracking-wider small d-block mb-1">Key Metrics</span>
-            <h2 class="fw-extrabold text-dark tracking-tight px-1" style="font-size: calc(1.3rem + 0.4vw);">Projected
-                Ecosystem Impact</h2>
-            <p class="text-muted small px-3 mt-2">Measurable strategic advancements created by combining targeted
-                workspace health solutions with technical faculty instruction.</p>
+            <img src="mitsc-png.png"  alt="MITSC Logo" class="hero-logo-img">
         </div>
 
-        <div class="row g-4 justify-content-center px-1">
-            <div class="col-sm-10 col-md-6 col-lg-4">
-                <div class="card border-0 shadow-sm overflow-hidden h-100 bg-white" style="border-radius: 12px;">
-                    <div class="photo-placeholder-box rounded-0 border-bottom">
-                        <img src="" alt="Student-Teacher Trust Framework">
-                    </div>
-                    <div class="card-body p-4">
-                        <h5 class="fw-bold text-dark mb-2" style="font-size: 1.05rem;">Bridging Interactive Gaps</h5>
-                        <p class="text-secondary small m-0">Re-aligning psychological and conversational pathways to
-                            eliminate communication barriers, directly boosting student baseline confidence metrics.</p>
-                    </div>
-                </div>
-            </div>
+        <!-- Headline -->
+        <h1 style="font-size:calc(2rem + 1.6vw);font-weight:800;letter-spacing:-.035em;line-height:1.1;margin-bottom:.9rem;">
+            Voice Care Workshop
+        </h1>
+        <p style="font-size:calc(.88rem + .14vw);font-weight:300;opacity:.88;max-width:600px;margin:0 auto;line-height:1.65;">
+            A special program to protect teachers' voices, improve their health,
+            and train them with new skills for better teaching.
+        </p>
 
-            <div class="col-sm-10 col-md-6 col-lg-4">
-                <div class="card border-0 shadow-sm overflow-hidden h-100 bg-white" style="border-radius: 12px;">
-                    <div class="photo-placeholder-box rounded-0 border-bottom">
-                        <img src="" alt="Quality Optimization Metrics">
-                    </div>
-                    <div class="card-body p-4">
-                        <h5 class="fw-bold text-dark mb-2" style="font-size: 1.05rem;">Quality Optimization</h5>
-                        <p class="text-secondary small m-0">Synchronized state-level investments generate measurable
-                            pedagogical upgrades, maintaining high educational parameters across remote regional
-                            institutes.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-10 col-md-6 col-lg-4">
-                <div class="card border-0 shadow-sm overflow-hidden h-100 bg-white" style="border-radius: 12px;">
-                    <div class="photo-placeholder-box rounded-0 border-bottom">
-                        <img src="" alt="Ecosystem Accountability Layout">
-                    </div>
-                    <div class="card-body p-4">
-                        <h5 class="fw-bold text-dark mb-2" style="font-size: 1.05rem;">Accountable Collaboration</h5>
-                        <p class="text-secondary small m-0">Active oversight from college principals and self-motivated
-                            faculty participation provide the foundation to fulfill regional development goals.</p>
-                    </div>
-                </div>
-            </div>
+        <!-- Animated voice wave (signature element) -->
+        <div class="wave-bars">
+            <div class="wb"></div>
+            <div class="wb"></div>
+            <div class="wb"></div>
+            <div class="wb"></div>
+            <div class="wb hi"></div>
+            <div class="wb hi"></div>
+            <div class="wb hi"></div>
+            <div class="wb hi"></div>
+            <div class="wb hi"></div>
+            <div class="wb hi"></div>
+            <div class="wb hi"></div>
+            <div class="wb hi"></div>
+            <div class="wb hi"></div>
+            <div class="wb"></div>
+            <div class="wb"></div>
+            <div class="wb"></div>
+            <div class="wb"></div>
+            <div class="wb"></div>
+            <div class="wb"></div>
+            <div class="wb"></div>
+            <div class="wb"></div>
         </div>
-    </section>
+    </div>
+
+    <!-- Curved bottom edge -->
+    <div class="hero-curve" style="margin-top:-2px;"></div>
+</header>
 
 
-    <!-- ================================================================= -->
-    <!-- FOOTER AREA                                                       -->
-    <!-- ================================================================= -->
-    <footer class="text-white pt-5 pb-0 mt-5 w-full text-start"
-        style="background: linear-gradient(to right, #5ca7db, #488cb8);"> <!-- Main Footer Content -->
-        <div class="container mx-auto px-4 pb-10">
-            <div class="row g-4">
+<!-- ========================================================= -->
+<!-- VOICE CARE SECTION                                        -->
+<!-- ========================================================= -->
+<section id="voice-care" class="py-5 mt-2">
+    <div class="container">
 
-                <!-- Column 1: Brand Info & App -->
-                <div class="col-12 col-md-6 col-lg-3 space-y-4">
-                    <div class="d-flex align-items-center gap-3">
-                        <img src="mitsc-png.png" alt="MITSC Logo" class="rounded border bg-light"
-                            style="width: 45px; height: 45px; object-fit: contain;">
-                        <span class="fw-bold fs-5 tracking-wide">MITSC</span>
+        <div class="text-center mx-auto mb-5" style="max-width:560px;">
+            <span class="eyebrow">Teacher Health &amp; Training</span>
+            <h2 class="sec-title">First-of-its-Kind<br>Voice Care for Teachers</h2>
+            <p class="mt-3" style="color:var(--muted);font-size:.93rem;line-height:1.65;">
+                Teachers speak for hours every single day. This program is designed to protect
+                and care for their most important tool — their voice.
+            </p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+
+            <!-- Card 1 -->
+            <div class="col-md-10 col-lg-4">
+                <div class="vc-card c1">
+                    <div class="vc-icon-box" style="background:#EBF5FF;color:var(--sky);">
+                        <i class="fa-solid fa-microphone-lines"></i>
                     </div>
-                    <p class="text-sm text-white/90 leading-relaxed font-light" style="font-size: 0.85rem;">
-                        Maharashtra Information Technology Support Centre - Empowering educational parameters, career
-                        accessibility, and rural self-reliance across Maharashtra.
-                    </p>
-                    <div class="pt-2">
-                        <a href="#" class="d-inline-block transition-transform hover:scale-105">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
-                                alt="Get it on Google Play" class="bg-black rounded p-1 border border-white/10"
-                                style="height: 38px; width: auto;">
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Column 2: Quick Links -->
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                    <h5 class="fw-bold fs-6 mb-3 position-relative pb-1"
-                        style="border-bottom: 2px solid rgba(255,255,255,0.3); width: max-content;">Quick Links</h5>
-                    <ul class="list-unstyled space-y-2 font-light" style="font-size: 0.88rem;">
-                        <li><a href="#" class="text-white text-decoration-none hover:underline opacity-90">Home</a></li>
-                        <li><a href="#key-points" class="text-white text-decoration-none hover:underline opacity-90">Key
-                                Initiatives</a></li>
-                        <li><a href="#training-pillars"
-                                class="text-white text-decoration-none hover:underline opacity-90">Training Pillars</a>
-                        </li>
-                        <li><a href="#impact-outcomes"
-                                class="text-white text-decoration-none hover:underline opacity-90">Impact Outcomes</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Column 3: Explore -->
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                    <h5 class="fw-bold fs-6 mb-3 position-relative pb-1"
-                        style="border-bottom: 2px solid rgba(255,255,255,0.3); width: max-content;">Explore</h5>
-                    <ul class="list-unstyled space-y-2 font-light" style="font-size: 0.88rem;">
-                        <li><a href="#" class="text-white text-decoration-none hover:underline opacity-90">About Us</a>
-                        </li>
-                        <li><a href="#" class="text-white text-decoration-none hover:underline opacity-90">Downloads</a>
-                        </li>
-                        <li><a href="#" class="text-white text-decoration-none hover:underline opacity-90">Career
-                                Katta</a></li>
-                        <li><a href="#" class="text-white text-decoration-none hover:underline opacity-90">Gallery</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Column 4: Official Information -->
-                <div class="col-12 col-md-6 col-lg-3 space-y-3">
-                    <h5 class="fw-bold fs-6 mb-3 position-relative pb-1"
-                        style="border-bottom: 2px solid rgba(255,255,255,0.3); width: max-content;">Official Information
+                    <h5 style="font-weight:700;font-size:1.03rem;color:var(--navy);margin-bottom:.6rem;">
+                        Protecting the Voice
                     </h5>
-
-                    <!-- Address -->
-                    <div class="d-flex gap-3 align-items-start" style="font-size: 0.85rem;">
-                        <div class="bg-white/20 p-2 rounded-circle flex-shrink-0 d-flex align-items-center justify-content-center"
-                            style="width: 32px; height: 32px;">
-                            <i class="fa-solid fa-location-dot text-xs"></i>
-                        </div>
-                        <div>
-                            <span class="fw-semibold d-block mb-0.5 text-uppercase tracking-wider opacity-75"
-                                style="font-size: 0.7rem;">Address</span>
-                            <p class="font-light text-white/90 m-0">Mahila Bank Basement, Khasbag Maidan,
-                                Kolhapur-416012</p>
-                        </div>
-                    </div>
-
-                    <!-- Email -->
-                    <div class="d-flex gap-3 align-items-start" style="font-size: 0.85rem;">
-                        <div class="bg-white/20 p-2 rounded-circle flex-shrink-0 d-flex align-items-center justify-content-center"
-                            style="width: 32px; height: 32px;">
-                            <i class="fa-solid fa-envelope text-xs"></i>
-                        </div>
-                        <div>
-                            <span class="fw-semibold d-block mb-0.5 text-uppercase tracking-wider opacity-75"
-                                style="font-size: 0.7rem;">Email</span>
-                            <a href="mailto:careerkatta365@gmail.com"
-                                class="text-white text-decoration-none font-light opacity-90 hover:underline">careerkatta365@gmail.com</a>
-                        </div>
-                    </div>
-
-                    <!-- Phone -->
-                    <div class="d-flex gap-3 align-items-start" style="font-size: 0.85rem;">
-                        <div class="bg-white/20 p-2 rounded-circle flex-shrink-0 d-flex align-items-center justify-content-center"
-                            style="width: 32px; height: 32px;">
-                            <i class="fa-solid fa-phone text-xs"></i>
-                        </div>
-                        <div>
-                            <span class="fw-semibold d-block mb-0.5 text-uppercase tracking-wider opacity-75"
-                                style="font-size: 0.7rem;">Phone</span>
-                            <a href="tel:7507652555"
-                                class="text-white text-decoration-none font-light opacity-90 hover:underline">7507652555</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Bottom Copyright Bar -->
-        <div class="bg-[#3e6a8c] py-4 border-t border-white/10 text-white/90" style="font-size: 0.85rem;">
-            <div
-                class="container mx-auto px-4 d-flex flex-column flex-sm-row align-items-center justify-content-between gap-3">
-                <div>
-                    <p class="m-0">© 2026 <span class="fw-bold">MITSC</span>. All rights reserved.</p>
-                </div>
-                <div class="d-flex align-items-center gap-3">
-                    <span class="fw-medium text-uppercase tracking-wider opacity-75" style="font-size: 0.7rem;">Follow
-                        Us:</span>
-                    <div class="d-flex items-center gap-2">
-                        <a href="#"
-                            class="bg-white/10 hover:bg-white/20 d-flex align-items-center justify-content-center rounded-circle text-white text-decoration-none"
-                            style="width: 30px; height: 30px;"><i class="fa-brands fa-facebook-f text-xs"></i></a>
-                        <a href="#"
-                            class="bg-white/10 hover:bg-white/20 d-flex align-items-center justify-content-center rounded-circle text-white text-decoration-none"
-                            style="width: 30px; height: 30px;"><i class="fa-brands fa-x-twitter text-xs"></i></a>
-                        <a href="#"
-                            class="bg-white/10 hover:bg-white/20 d-flex align-items-center justify-content-center rounded-circle text-white text-decoration-none"
-                            style="width: 30px; height: 30px;"><i class="fa-brands fa-instagram text-xs"></i></a>
-                        <a href="#"
-                            class="bg-white/10 hover:bg-white/20 d-flex align-items-center justify-content-center rounded-circle text-white text-decoration-none"
-                            style="width: 30px; height: 30px;"><i class="fa-brands fa-linkedin-in text-xs"></i></a>
-                        <a href="#"
-                            class="bg-white/10 hover:bg-white/20 d-flex align-items-center justify-content-center rounded-circle text-white text-decoration-none"
-                            style="width: 30px; height: 30px;"><i class="fa-brands fa-youtube text-xs"></i></a>
-                    </div>
+                    <p style="font-size:.87rem;line-height:1.72;color:var(--muted);margin:0;">
+                        Teachers use their voice for hours every day. This program treats them as
+                        "Professional Voice Users" and helps them keep their voice healthy and
+                        strong for a long time.
+                    </p>
                 </div>
             </div>
-        </div>
-    </footer>
 
-    <!-- Bootstrap 5 JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+            <!-- Card 2 -->
+            <div class="col-md-10 col-lg-4">
+                <div class="vc-card c2">
+                    <div class="vc-icon-box" style="background:#EEF2FF;color:var(--blue);">
+                        <i class="fa-solid fa-wave-square"></i>
+                    </div>
+                    <h5 style="font-weight:700;font-size:1.03rem;color:var(--navy);margin-bottom:.6rem;">
+                        Finding Voice Problems Early
+                    </h5>
+                    <p style="font-size:.87rem;line-height:1.72;color:var(--muted);margin:0;">
+                        Teachers are trained to notice small changes in their voice. This helps them
+                        catch any voice problem early — before it becomes serious or causes lasting
+                        damage.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-md-10 col-lg-4">
+                <div class="vc-card c3">
+                    <div class="vc-icon-box" style="background:#ECFDF5;color:var(--green);">
+                        <i class="fa-solid fa-shield-heart"></i>
+                    </div>
+                    <h5 style="font-weight:700;font-size:1.03rem;color:var(--navy);margin-bottom:.6rem;">
+                        Overall Health &amp; Good Workplace
+                    </h5>
+                    <p style="font-size:.87rem;line-height:1.72;color:var(--muted);margin:0;">
+                        Along with voice care, this program also looks at making the classroom and
+                        workplace more comfortable and healthy for teachers across Maharashtra.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<div class="fade-divider my-2"></div>
+
+
+<!-- ========================================================= -->
+<!-- FDP SECTION                                               -->
+<!-- ========================================================= -->
+<section id="fdp-programs" class="py-5" style="background:var(--light-bg);">
+    <div class="container">
+
+        <div class="text-center mx-auto mb-5" style="max-width:560px;">
+            <span class="eyebrow">Career Advancement Scheme (C.A.S.)</span>
+            <h2 class="sec-title">Modern Skills Training<br>for Teachers</h2>
+            <p class="mt-3" style="color:var(--muted);font-size:.93rem;line-height:1.65;">
+                Working with MSFDA and Madan Mohan Malaviya Faculty Development Academy
+                to give teachers useful, practical skills.
+            </p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+
+            <!-- Emotional Intelligence -->
+            <div class="col-sm-10 col-md-6 col-lg-4">
+                <div class="fdp-card">
+                    <div class="fdp-header" style="background:linear-gradient(135deg,#1565C0,#0EA5E9);">
+                        <div class="fdp-icon-ring"><i class="fa-solid fa-brain"></i></div>
+                    </div>
+                    <div class="fdp-body">
+                        <h5 style="font-weight:700;color:var(--navy);margin-bottom:.6rem;">
+                            Emotional Intelligence
+                        </h5>
+                        <p style="font-size:.87rem;line-height:1.72;color:var(--muted);margin:0;">
+                            Helping teachers understand and manage feelings — their own and their
+                            students'. This makes teaching easier and the classroom a better place
+                            for everyone.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design Thinking -->
+            <div class="col-sm-10 col-md-6 col-lg-4">
+                <div class="fdp-card">
+                    <div class="fdp-header" style="background:linear-gradient(135deg,#7C3AED,#DB2777);">
+                        <div class="fdp-icon-ring"><i class="fa-solid fa-lightbulb"></i></div>
+                    </div>
+                    <div class="fdp-body">
+                        <h5 style="font-weight:700;color:var(--navy);margin-bottom:.6rem;">
+                            Design Thinking
+                        </h5>
+                        <p style="font-size:.87rem;line-height:1.72;color:var(--muted);margin:0;">
+                            Teaching teachers to think in new and creative ways to solve problems
+                            in class and make their lessons more interesting for students.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Tools -->
+            <div class="col-sm-10 col-md-6 col-lg-4">
+                <div class="fdp-card">
+                    <div class="fdp-header" style="background:linear-gradient(135deg,#059669,#0EA5E9);">
+                        <div class="fdp-icon-ring"><i class="fa-solid fa-robot"></i></div>
+                    </div>
+                    <div class="fdp-body">
+                        <h5 style="font-weight:700;color:var(--navy);margin-bottom:.6rem;">
+                            AI Tools Training
+                        </h5>
+                        <p style="font-size:.87rem;line-height:1.72;color:var(--muted);margin:0;">
+                            Teaching teachers how to use AI tools to save time, reduce extra work,
+                            and bring modern technology into the classroom.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<div class="fade-divider my-2"></div>
+
+
+<!-- ========================================================= -->
+<!-- IMPACT SECTION                                            -->
+<!-- ========================================================= -->
+<section id="impact-outcomes" class="py-5">
+    <div class="container">
+
+        <div class="text-center mx-auto mb-5" style="max-width:560px;">
+            <span class="eyebrow">Key Results</span>
+            <h2 class="sec-title">What This Program<br>Will Achieve</h2>
+            <p class="mt-3" style="color:var(--muted);font-size:.93rem;line-height:1.65;">
+                Real, visible changes that happen when teachers are trained well and
+                their health is properly taken care of.
+            </p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+
+            <!-- Card 1 -->
+            <div class="col-sm-10 col-md-6 col-lg-4">
+                <div class="impact-card">
+                    <div class="impact-icon" style="background:#EBF5FF;color:var(--blue);">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h5 style="font-weight:700;color:var(--navy);margin-bottom:.6rem;">
+                        Better Connection in Class
+                    </h5>
+                    <p style="font-size:.87rem;line-height:1.72;color:var(--muted);margin:0;">
+                        When teachers communicate better, students feel more comfortable asking
+                        questions and taking part in class. This builds their confidence.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-sm-10 col-md-6 col-lg-4">
+                <div class="impact-card">
+                    <div class="impact-icon" style="background:#ECFDF5;color:var(--green);">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h5 style="font-weight:700;color:var(--navy);margin-bottom:.6rem;">
+                        Better Teaching Quality
+                    </h5>
+                    <p style="font-size:.87rem;line-height:1.72;color:var(--muted);margin:0;">
+                        With proper training and state support, teaching quality improves — even
+                        in colleges in small towns and rural areas of Maharashtra.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-sm-10 col-md-6 col-lg-4">
+                <div class="impact-card">
+                    <div class="impact-icon" style="background:#FFF7ED;color:var(--amber);">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <h5 style="font-weight:700;color:var(--navy);margin-bottom:.6rem;">
+                        Teamwork and Responsibility
+                    </h5>
+                    <p style="font-size:.87rem;line-height:1.72;color:var(--muted);margin:0;">
+                        Principals and teachers work together with full dedication. This teamwork
+                        helps the program reach its goals and makes a real difference.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ========================================================= -->
+<!-- FOOTER                                                    -->
+<!-- ========================================================= -->
+<footer class="footer-wrap text-white pt-5 mt-4">
+    <div class="container px-4 pb-5">
+        <div class="row g-4">
+
+            <!-- Brand -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <img src="mitsc-png.png" alt="MITSC" class="rounded border bg-light"
+                         style="width:44px;height:44px;object-fit:contain;">
+                    <span style="font-weight:700;font-size:1.1rem;">MITSC</span>
+                </div>
+                <p style="font-size:.85rem;opacity:.82;line-height:1.65;margin-bottom:1rem;">
+                    Maharashtra Information Technology Support Centre — Helping improve education,
+                    career opportunities, and self-reliance for people across Maharashtra.
+                </p>
+                <a href="#">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                         alt="Get it on Google Play" class="rounded p-1"
+                         style="height:36px;width:auto;background:#000;border:1px solid rgba(255,255,255,.15);">
+                </a>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="footer-h">Quick Links</div>
+                <a href="#"               class="footer-link">Home</a>
+                <a href="#voice-care"     class="footer-link">Voice Care</a>
+                <a href="#fdp-programs"   class="footer-link">FDP Programs</a>
+                <a href="#impact-outcomes"class="footer-link">Our Impact</a>
+            </div>
+
+            <!-- Explore -->
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="footer-h">Explore</div>
+                <a href="#" class="footer-link">About Us</a>
+                <a href="#" class="footer-link">Downloads</a>
+                <a href="#" class="footer-link">Career Katta</a>
+                <a href="#" class="footer-link">Gallery</a>
+            </div>
+
+            <!-- Contact -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="footer-h">Contact Us</div>
+
+                <div class="contact-row">
+                    <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <div>
+                        <span class="contact-label">Address</span>
+                        <span class="contact-val">Mahila Bank Basement, Khasbag Maidan, Kolhapur - 416012</span>
+                    </div>
+                </div>
+
+                <div class="contact-row">
+                    <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div>
+                        <span class="contact-label">Email</span>
+                        <a href="mailto:careerkatta365@gmail.com"
+                           class="contact-val text-white text-decoration-none">careerkatta365@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-row">
+                    <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                    <div>
+                        <span class="contact-label">Phone</span>
+                        <a href="tel:7507652555"
+                           class="contact-val text-white text-decoration-none">7507652555</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="background:rgba(0,0,0,.22);border-top:1px solid rgba(255,255,255,.1);padding:.9rem 0;">
+        <div class="container px-4 d-flex flex-column flex-sm-row align-items-center justify-content-between gap-3"
+             style="font-size:.83rem;opacity:.82;">
+            <p class="m-0">© 2026 <strong>MITSC</strong>. All rights reserved.</p>
+            <div class="d-flex align-items-center gap-2">
+                <span style="font-size:.67rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.6;">Follow Us:</span>
+                <a href="#" class="soc-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="soc-btn"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" class="soc-btn"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="soc-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" class="soc-btn"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
